@@ -1,8 +1,11 @@
-html,
-body {
+/* General styles */
+body,
+html {
   height: 100%;
   margin: 0;
   background-color: #d9e6d8;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  cursor: pointer;
 }
 
 body {
@@ -41,12 +44,30 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
 }
+
 #displayName:hover,
 #displayName:focus {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 .score {
   margin-right: 10px;
+}
+
+input[type="submit"] {
+  margin-left: 10%;
+  padding: 12px 24px;
+  font-size: 1em;
+  border: none;
+  border-radius: 6px;
+  background-color: #4caf50; /* Green background */
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+input[type="submit"]:hover {
+  background-color: #45a049; /* Darker green on hover */
 }
 
 #introduction {
@@ -82,4 +103,189 @@ body {
   position: absolute;
   opacity: 0;
   transition: opacity 2s;
+}
+
+/* Modern Gaming Navbar styles */
+.navbar {
+  background: linear-gradient(45deg, #000428, #004e92);
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  border-bottom: 2px solid #00ffcc;
+  overflow: hidden; /* Ensure content does not overflow */
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px; /* Limit maximum width for better readability */
+  margin: 0 auto; /* Center align and add margin */
+}
+
+.navbar-logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s ease;
+  text-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 30px #00ffcc;
+}
+
+.navbar-logo:hover {
+  color: #00ffcc;
+}
+
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-item {
+  margin: 0 5px;
+}
+
+.navbar-links {
+  text-decoration: none;
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.3s ease;
+}
+
+.navbar-links::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: rgba(0, 255, 204, 0.5);
+  transition: width 0.3s ease, left 0.3s ease;
+  transform: translate(-50%, 50%);
+  box-shadow: 0 0 10px rgba(0, 255, 204, 0.5), 0 0 20px rgba(0, 255, 204, 0.5),
+    0 0 30px rgba(0, 255, 204, 0.5);
+  z-index: -1;
+}
+
+.navbar-links:hover::before {
+  width: 100%;
+  left: 50%;
+}
+
+.navbar-links:hover {
+  color: #00ffcc;
+  text-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc, 0 0 15px #00ffcc;
+}
+
+/* Mobile Menu */
+.navbar-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.bar {
+  height: 3px;
+  width: 25px;
+  background-color: #fff;
+  margin: 4px 0;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .navbar-menu {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background: linear-gradient(45deg, #000428, #004e92);
+    position: absolute;
+    top: 60px;
+    padding: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+
+  .navbar-menu.active {
+    display: flex;
+  }
+
+  .navbar-item {
+    margin: 0.5rem 0;
+  }
+
+  .navbar-toggle {
+    display: flex;
+  }
+
+  .navbar-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .navbar-toggle.active .bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .navbar-toggle.active .bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+}
+
+/* Scoreboard and Teaser Styles */
+.scoreboard-container,
+.teaser-container {
+  background-color: #d9e6d8;
+  margin-top: 100px;
+  text-align: center;
+}
+
+.scoreboard-table {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.scoreboard-table th,
+.scoreboard-table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.scoreboard-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.scoreboard-table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.video-container {
+  margin: 0 auto;
+  max-width: 600px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.video-container video {
+  width: 100%;
+  height: auto;
+  border: 2px solid #00ffcc;
 }

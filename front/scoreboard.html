@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Stick Hero Scoreboard</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar-container">
+        <a href="index.html" class="navbar-logo">Stick Hero</a>
+        <div class="navbar-toggle" id="mobile-menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </div>
+        <ul class="navbar-menu">
+          <li class="navbar-item">
+            <a href="index.html" class="navbar-links">Home</a>
+          </li>
+          <li class="navbar-item">
+            <a href="scoreboard.html" class="navbar-links">Scoreboard</a>
+          </li>
+          <li class="navbar-item">
+            <a href="teaser.html" class="navbar-links">Teaser</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="scoreboard-container">
+      <h1>Scoreboard</h1>
+      <table class="scoreboard-table">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Display Name</th>
+            <th>Score</th>
+          </tr>
+        </thead>
+        <tbody id="scoreboard-body">
+          <!-- Scores will be dynamically inserted here -->
+        </tbody>
+      </table>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        console.log("DOM fully loaded and parsed");
+
+        const mobileMenu = document.getElementById("mobile-menu");
+        const navbarMenu = document.querySelector(".navbar-menu");
+
+        mobileMenu.addEventListener("click", () => {
+          navbarMenu.classList.toggle("active");
+          mobileMenu.classList.toggle("active");
+        });
+
+        // Function to fetch and display scores
+        function fetchAndDisplayScores() {
+          console.log("Fetching scores...");
+
+          fetch("http://localhost:3000/scores")
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error(
+                  "Network response was not ok " + response.statusText
+                );
+              }
+              return response.json();
+            })
+            .then((scores) => {
+              console.log("Scores fetched:", scores);
+
+              const scoreboardBody = document.getElementById("scoreboard-body");
+              scoreboardBody.innerHTML = ""; // Clear any existing rows
+
+              scores.forEach((score, index) => {
+                const row = document.createElement("tr");
+                const rankCell = document.createElement("td");
+                const displayNameCell = document.createElement("td");
+                const scoreCell = document.createElement("td");
+
+                rankCell.textContent = index + 1;
+                displayNameCell.textContent = score.displayName;
+                scoreCell.textContent = score.score;
+
+                row.appendChild(rankCell);
+                row.appendChild(displayNameCell);
+                row.appendChild(scoreCell);
+
+                scoreboardBody.appendChild(row);
+              });
+            })
+            .catch((error) => {
+              console.error("Error fetching scores:", error);
+            });
+        }
+
+        // Call the function to fetch and display scores when the page loads
+        fetchAndDisplayScores();
+      });
+    </script>
+  </body>
+</html>

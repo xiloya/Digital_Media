@@ -355,7 +355,7 @@ function drawPlatforms() {
 
 function drawHero() {
   ctx.save();
-  ctx.fillStyle = "black";
+  ctx.fillStyle = "blue";
   ctx.translate(
     heroX - heroWidth / 2,
     heroY + canvasHeight - platformHeight - heroHeight / 2
@@ -369,8 +369,17 @@ function drawHero() {
     heroHeight - 4,
     5
   );
+  ctx.fillStyle = "red";
+  drawRoundedRect(
+    -heroWidth / 2,
+    -heroHeight / 2,
+    heroWidth,
+    heroHeight / 3,
+    5
+  );
 
   // Legs
+  ctx.fillStyle = "blue";
   const legDistance = 5;
   ctx.beginPath();
   ctx.arc(legDistance, 11.5, 3, 0, Math.PI * 2, false);
@@ -510,9 +519,7 @@ function getTreeY(x, baseHeight, amplitude) {
   const sineBaseY = window.innerHeight - baseHeight;
   return Math.sinus(x) * amplitude + sineBaseY;
 }
-// Rest of the code
 
-// Add an event listener for the form submission
 document
   .getElementById("inputContainer")
   .addEventListener("submit", function (event) {
@@ -543,3 +550,12 @@ document
         console.error("Error:", error);
       });
   });
+document.addEventListener("DOMContentLoaded", () => {
+  const mobileMenu = document.getElementById("mobile-menu");
+  const navbarMenu = document.querySelector(".navbar-menu");
+
+  mobileMenu.addEventListener("click", () => {
+    navbarMenu.classList.toggle("active");
+    mobileMenu.classList.toggle("active");
+  });
+});
